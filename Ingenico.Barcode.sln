@@ -1,0 +1,89 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01 - Presentation", "01 - Presentation", "{233C06D9-18DB-44C1-83B0-B6E5220FF9C8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02 - Domain", "02 - Domain", "{074425D5-492B-4870-A573-61AC5E43B9F5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "03 - Infra", "03 - Infra", "{86E7D06A-4C4B-42E8-8E53-CEED8AE04447}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "04 - CrossCutting", "04 - CrossCutting", "{32BCA7DA-DD67-4875-9D7E-8AFE16932FF5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "06 - Tests", "06 - Tests", "{17B0CD2E-B5E9-46D2-AA32-553890138E0F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "07 - Itens", "07 - Itens", "{22551604-CBEE-4556-B96E-39678AB24549}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ingenico.Barcode.API", "src\Ingenico.Barcode.API\Ingenico.Barcode.API.csproj", "{61A4291D-AD5C-439C-A199-BEAFA070F45F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ingenico.Barcode.Domain", "src\Ingenico.Barcode.Domain\Ingenico.Barcode.Domain.csproj", "{8594980C-EA94-4EB7-9F08-00AE39617F70}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ingenico.Barcode.Data", "src\Ingenico.Barcode.Data\Ingenico.Barcode.Data.csproj", "{6972CC81-8963-4E38-8FA3-4C26058372A4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ingenico.Barcode.IoC", "src\Ingenico.Barcode.IoC\Ingenico.Barcode.IoC.csproj", "{861CFD13-7F7D-4331-89EC-12B506C638FA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ingenico.Barcode.Shared", "src\Ingenico.Barcode.Shared\Ingenico.Barcode.Shared.csproj", "{A630ACA0-94E3-40FE-9A95-FC23121E393B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ingenico.Barcode.Data.Tests", "tests\Ingenico.Barcode.Data.Tests\Ingenico.Barcode.Data.Tests.csproj", "{03775331-DF3C-43B5-B55D-6B1E8F47D1DF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ingenico.Barcode.Domain.Tests", "tests\Ingenico.Barcode.Domain.Tests\Ingenico.Barcode.Domain.Tests.csproj", "{3E425710-2F15-4562-97B8-730F64547FA1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ingenico.Barcode.API.Tests", "tests\Ingenico.Barcode.API.Tests\Ingenico.Barcode.API.Tests.csproj", "{CF7A93BB-72C3-4E0F-8520-9FF0D92618B2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{61A4291D-AD5C-439C-A199-BEAFA070F45F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61A4291D-AD5C-439C-A199-BEAFA070F45F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61A4291D-AD5C-439C-A199-BEAFA070F45F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61A4291D-AD5C-439C-A199-BEAFA070F45F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8594980C-EA94-4EB7-9F08-00AE39617F70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8594980C-EA94-4EB7-9F08-00AE39617F70}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8594980C-EA94-4EB7-9F08-00AE39617F70}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8594980C-EA94-4EB7-9F08-00AE39617F70}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6972CC81-8963-4E38-8FA3-4C26058372A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6972CC81-8963-4E38-8FA3-4C26058372A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6972CC81-8963-4E38-8FA3-4C26058372A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6972CC81-8963-4E38-8FA3-4C26058372A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{861CFD13-7F7D-4331-89EC-12B506C638FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{861CFD13-7F7D-4331-89EC-12B506C638FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{861CFD13-7F7D-4331-89EC-12B506C638FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{861CFD13-7F7D-4331-89EC-12B506C638FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A630ACA0-94E3-40FE-9A95-FC23121E393B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A630ACA0-94E3-40FE-9A95-FC23121E393B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A630ACA0-94E3-40FE-9A95-FC23121E393B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A630ACA0-94E3-40FE-9A95-FC23121E393B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03775331-DF3C-43B5-B55D-6B1E8F47D1DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03775331-DF3C-43B5-B55D-6B1E8F47D1DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03775331-DF3C-43B5-B55D-6B1E8F47D1DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03775331-DF3C-43B5-B55D-6B1E8F47D1DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E425710-2F15-4562-97B8-730F64547FA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E425710-2F15-4562-97B8-730F64547FA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E425710-2F15-4562-97B8-730F64547FA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E425710-2F15-4562-97B8-730F64547FA1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF7A93BB-72C3-4E0F-8520-9FF0D92618B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF7A93BB-72C3-4E0F-8520-9FF0D92618B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF7A93BB-72C3-4E0F-8520-9FF0D92618B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF7A93BB-72C3-4E0F-8520-9FF0D92618B2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{61A4291D-AD5C-439C-A199-BEAFA070F45F} = {233C06D9-18DB-44C1-83B0-B6E5220FF9C8}
+		{8594980C-EA94-4EB7-9F08-00AE39617F70} = {074425D5-492B-4870-A573-61AC5E43B9F5}
+		{6972CC81-8963-4E38-8FA3-4C26058372A4} = {86E7D06A-4C4B-42E8-8E53-CEED8AE04447}
+		{861CFD13-7F7D-4331-89EC-12B506C638FA} = {32BCA7DA-DD67-4875-9D7E-8AFE16932FF5}
+		{A630ACA0-94E3-40FE-9A95-FC23121E393B} = {32BCA7DA-DD67-4875-9D7E-8AFE16932FF5}
+		{03775331-DF3C-43B5-B55D-6B1E8F47D1DF} = {17B0CD2E-B5E9-46D2-AA32-553890138E0F}
+		{3E425710-2F15-4562-97B8-730F64547FA1} = {17B0CD2E-B5E9-46D2-AA32-553890138E0F}
+		{CF7A93BB-72C3-4E0F-8520-9FF0D92618B2} = {17B0CD2E-B5E9-46D2-AA32-553890138E0F}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DC073043-4211-4D6E-A972-64EF6D08174D}
+	EndGlobalSection
+EndGlobal
