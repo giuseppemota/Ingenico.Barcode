@@ -62,8 +62,8 @@ namespace Ingenico.Barcode.IoC
         {
             services.AddDbContext<ApplicationDbContext>((sp, options) =>
             {
-                options.UseSqlite(configuration.GetConnectionString("DefaultConnection"));
-                //options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
+                //options.UseSqlite(configuration.GetConnectionString("DefaultConnection"));
+                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
             });
 
             services.AddScoped<ApplicationDbContextInitialiser>();
