@@ -14,6 +14,9 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.ConfigureAppDependencies(builder.Configuration);
 
+
+
+
 //builder.Host.UseSerilog((context, configuration) =>
 //{
 //    configuration.ReadFrom.Configuration(context.Configuration);

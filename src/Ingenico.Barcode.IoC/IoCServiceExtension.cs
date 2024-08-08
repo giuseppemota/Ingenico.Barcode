@@ -1,13 +1,17 @@
 ﻿
 using System.Diagnostics.CodeAnalysis;
+using System.Text;
 using FluentValidation;
 using Ingenico.Barcode.Data;
 using Ingenico.Barcode.Domain.Pipelines;
 using Ingenico.Barcode.Shared;
 using MediatR;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Ingenico.Barcode.IoC
 
@@ -23,6 +27,8 @@ namespace Ingenico.Barcode.IoC
             services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ExceptionPipeline<,>));
             services.AddScoped(typeof(IPipelineBehavior<,>), typeof(BehaviorValidation<,>));
             ConfigurarFluentValidation(services);
+
+            ConfigureJWT(services, configuration);
 
 
 
@@ -62,11 +68,35 @@ namespace Ingenico.Barcode.IoC
         {
             services.AddDbContext<ApplicationDbContext>((sp, options) =>
             {
-                options.UseSqlite(configuration.GetConnectionString("DefaultConnection"));
-                //options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
+                //options.UseSqlite(configuration.GetConnectionString("DefaultConnection"));
+                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
             });
 
             services.AddScoped<ApplicationDbContextInitialiser>();
+        }
+
+        private static void ConfigureJWT(IServiceCollection services, IConfiguration configuration) {
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
+
+            // Configurar JWT
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(options => {
+                options.TokenValidationParameters = new TokenValidationParameters {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = configuration["Jwt:Issuer"],
+                    ValidAudience = configuration["Jwt:Audience"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Key"]))
+                };
+            });
         }
     }
 }
