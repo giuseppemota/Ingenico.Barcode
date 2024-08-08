@@ -6,7 +6,14 @@ using System.Threading.Tasks;
 
 namespace Ingenico.Barcode.Shared.Responses {
     public class LoginUserResponse {
-        public bool Success { get; set; }
-        public string Message { get; set; }
+        public LoginUserResponse(string token, DateTime expiration) {
+            Token = token;
+            Expiration = expiration;
+        }
+
+        public LoginUserResponse() { }
+
+        public string Token {  get; set; }
+        public DateTime Expiration {  get; set; }
     }
 }

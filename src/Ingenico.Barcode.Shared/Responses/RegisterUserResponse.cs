@@ -8,7 +8,10 @@ using OperationResult;
 
 namespace Ingenico.Barcode.Shared.Responses {
     public class RegisterUserResponse {
+        public RegisterUserResponse(bool success) {
+            Success = success;
+        }
+
         public bool Success {  get; set; }
-        public string Message { get; set; } = default!;
     }
 }

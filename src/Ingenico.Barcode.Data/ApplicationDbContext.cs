@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Ingenico.Barcode.Domain.Entites;
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection.Emit;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -7,7 +6,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace Ingenico.Barcode.Data;
 
-public class ApplicationDbContext : IdentityDbContext<User> {
+public class ApplicationDbContext : IdentityDbContext {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) {
     }
 

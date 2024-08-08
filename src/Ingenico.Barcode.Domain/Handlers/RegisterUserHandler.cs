@@ -1,8 +1,9 @@
-﻿using Ingenico.Barcode.Domain.Entites;
-using Ingenico.Barcode.Domain.Repository;
+﻿using Ingenico.Barcode.Domain.Repository;
 using Ingenico.Barcode.Shared.Requests;
 using Ingenico.Barcode.Shared.Responses;
 using MediatR;
+using Microsoft.AspNetCore.Identity;
+using OperationResult;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,24 +11,30 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Ingenico.Barcode.Domain.Handlers {
-    public class RegisterUserHandler : IRequestHandler<RegisterUserRequest, RegisterUserResponse> {
-        private readonly IUserRepository _userRepository;
 
-        public RegisterUserHandler(IUserRepository userRepository) {
-            _userRepository = userRepository;
+    public class RegisterUserHandler : IRequestHandler<RegisterUserRequest, Result<RegisterUserResponse>> {
+
+        private readonly UserManager<IdentityUser> userManager;
+
+        public RegisterUserHandler(UserManager<IdentityUser> userManager) {
+            this.userManager = userManager;
         }
 
-        public async Task<RegisterUserResponse> Handle(RegisterUserRequest request, CancellationToken cancellationToken) {
-            var user = new User {
-                UserName = request.UserName,
+        public async Task<Result<RegisterUserResponse>> Handle(RegisterUserRequest request, CancellationToken cancellationToken) {
+            var user = new IdentityUser {
+                UserName = request.Email,
                 Email = request.Email
             };
 
-            var result = await _userRepository.RegisterUserAsync(user, request.Password);
-            return new RegisterUserResponse {
-                Success = result,
-                Message = result ? "User registered successfully." : "User registration failed."
-            };
+            // Armazena os dados do usuário na tabela AspNetUsers
+            var result = await userManager.CreateAsync(user, request.Password);
+
+            // Se o usuário foi criado com sucesso, faz o login do usuário
+
+            return new RegisterUserResponse(result.Succeeded);
+
+            
+          
         }
     }
 }
