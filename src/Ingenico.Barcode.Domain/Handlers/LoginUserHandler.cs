@@ -12,6 +12,8 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.HttpResults;
 using OperationResult;
 
 namespace Ingenico.Barcode.Domain.Handlers {
@@ -39,7 +41,7 @@ namespace Ingenico.Barcode.Domain.Handlers {
                 new Claim(ClaimTypes.NameIdentifier, user.Id)
             };
 
-                var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
+                var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]!));
 
                 var token = new JwtSecurityToken(
                     issuer: _configuration["Jwt:Issuer"],
@@ -52,7 +54,8 @@ namespace Ingenico.Barcode.Domain.Handlers {
                 return new LoginUserResponse(resultado, token.ValidTo);
             }
             else {
-                return new LoginUserResponse();
+                // return new LoginUserResponse();
+                return Result.Error<LoginUserResponse>(new Exception("Invalid credentials"));
             }
         }
     }
