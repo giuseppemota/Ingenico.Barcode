@@ -1,4 +1,5 @@
-﻿using Ingenico.Barcode.Shared.Requests;
+﻿using Ingenico.Barcode.Shared.Exceptions;
+using Ingenico.Barcode.Shared.Requests;
 using Ingenico.Barcode.Shared.Responses;
 using MediatR;
 using Microsoft.AspNetCore.Http;
