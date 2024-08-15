@@ -1,8 +1,8 @@
 ﻿namespace Ingenico.Barcode.Shared.Exceptions;
 
-public class ExcecaoAplicacao : Exception
+public class ExceptionAplication : Exception
 {
-    public ExcecaoAplicacao(ErrorResult erro)
+    public ExceptionAplication(ErrorResult erro)
      : base(erro.Descricao) => ResponseErro = erro;
 
     public ErrorResult ResponseErro { get; set; }

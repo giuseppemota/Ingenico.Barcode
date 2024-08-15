@@ -2,7 +2,7 @@
 
 namespace Ingenico.Barcode.Shared.Enums;
 
-public class AnaliseMensagemErro
+public class GenericErrors
 {
     public static readonly ErrorResult Generico = new()
     {
