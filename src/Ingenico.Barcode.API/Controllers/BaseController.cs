@@ -31,14 +31,13 @@ public class BaseController : ControllerBase
 
     protected ActionResult HandleError(Exception error)
     {
-        if (error is ExcecaoAplicacao excecao)
+        if (error is ExceptionAplication excecao)
         {
             return BadRequest(FormatErrorMessage(excecao.ResponseErro));
         }
         else
         {
-            // Se a exce��o n�o for do tipo ExcecaoAplicacao, retorna um erro gen�rico
-            return BadRequest(FormatErrorMessage(AnaliseMensagemErro.Generico));
+            return BadRequest(FormatErrorMessage(GenericErrors.Generico));
         }
     }
 
