@@ -5,11 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Ingenico.Barcode.Domain.Entites {
-    public class Tag {
+    public class TagEntity {
         public int TagId { get; set; }
-        public string NomeTag { get; set; }
+        public string NomeTag { get; set; } = default!;
+
+        public int IdProduto {  get; set; } 
 
         // Relacionamento com Produto (Muitos para Muitos)
-        public ICollection<Produto> Produtos { get; set; } 
+        public ProdutoEntity Produto { get; set; } = default!;
     }
 }

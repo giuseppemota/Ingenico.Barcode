@@ -1,12 +1,8 @@
 ﻿using Ingenico.Barcode.Shared.Responses;
 using MediatR;
 using OperationResult;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Ingenico.Barcode.Shared.Requests {
     public class LoginUserRequest : IRequest <Result<LoginUserResponse>> {

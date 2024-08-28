@@ -1,12 +1,12 @@
 ﻿using Ingenico.Barcode.Domain.Entites;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ingenico.Barcode.Domain.Repository {
-    public interface ITagRepository {
-        Task<IEnumerable<Tag>> GetTagsByProdutoIdAsync(int produtoId);
+    public interface ITagRepository { 
+        Task<TagEntity> ObterTagAsync(int id);
+        Task<List<TagEntity>> ObterTodasTagsAsync();
+        Task<TagEntity> CadastrarTagAsync(TagEntity tag);
+        Task<TagEntity> AtualizarTagAsync(TagEntity tag);
+        Task<TagEntity> ExcluirTagAsync(TagEntity tag);
+
     }
 }
