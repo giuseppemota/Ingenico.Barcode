@@ -6,6 +6,6 @@ using OperationResult;
 
 namespace Ingenico.Barcode.Shared.Requests {
     public class ObterTagRequest :  IRequest<Result<ObterTagResponse>> {
-        public int TagId { get; set; }
+        public Guid TagId { get; set; }
     }
 }

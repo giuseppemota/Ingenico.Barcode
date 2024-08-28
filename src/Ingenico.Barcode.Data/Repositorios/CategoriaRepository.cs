@@ -28,7 +28,7 @@ namespace Ingenico.Barcode.Data.Repositorios {
             return categoria;
         }
 
-        public async Task<CategoriaEntity> ObterCategoriaAsync(int id) {
+        public async Task<CategoriaEntity> ObterCategoriaAsync(Guid id) {
             var categoria = await _context.Categoria
                 .FirstOrDefaultAsync(p => p.CategoriaId == id);
             return categoria;

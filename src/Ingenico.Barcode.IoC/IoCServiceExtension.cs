@@ -29,14 +29,17 @@ namespace Ingenico.Barcode.IoC
             services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ExceptionPipeline<,>));
             services.AddScoped(typeof(IPipelineBehavior<,>), typeof(BehaviorValidation<,>));
 
+            ConfigurarFluentValidation(services);
+            ConfigureJWT(services, configuration);
+
             services.AddScoped<ICategoriaRepository, CategoriaRepository>();
             services.AddScoped<ITagRepository, TagRepository>();
             services.AddScoped<IProdutoRepository, ProdutoRepository>();
             services.AddTransient<IUnitOfWork, UnitOfWork>();
 
-            ConfigurarFluentValidation(services);
+            
 
-            ConfigureJWT(services, configuration);
+            
 
 
 

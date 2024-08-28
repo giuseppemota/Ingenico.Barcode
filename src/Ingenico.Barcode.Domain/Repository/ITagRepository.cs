@@ -2,7 +2,7 @@
 
 namespace Ingenico.Barcode.Domain.Repository {
     public interface ITagRepository { 
-        Task<TagEntity> ObterTagAsync(int id);
+        Task<TagEntity> ObterTagAsync(Guid id);
         Task<List<TagEntity>> ObterTodasTagsAsync();
         Task<TagEntity> CadastrarTagAsync(TagEntity tag);
         Task<TagEntity> AtualizarTagAsync(TagEntity tag);

@@ -22,6 +22,91 @@ namespace Ingenico.Barcode.Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("Ingenico.Barcode.Domain.Entites.CategoriaEntity", b =>
+                {
+                    b.Property<Guid>("CategoriaId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("IdProduto")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("CategoriaId");
+
+                    b.HasIndex("IdProduto");
+
+                    b.ToTable("Categoria", (string)null);
+                });
+
+            modelBuilder.Entity("Ingenico.Barcode.Domain.Entites.ProdutoEntity", b =>
+                {
+                    b.Property<Guid>("ProdutoId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Descricao")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Ingredientes")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Marca")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.Property<string>("PaisOrigem")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("Peso")
+                        .HasColumnType("float");
+
+                    b.Property<double>("Preco")
+                        .HasColumnType("float");
+
+                    b.Property<string>("UnidadeMedida")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Validade")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("ProdutoId");
+
+                    b.ToTable("Produto", (string)null);
+                });
+
+            modelBuilder.Entity("Ingenico.Barcode.Domain.Entites.TagEntity", b =>
+                {
+                    b.Property<Guid>("TagId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("IdProduto")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("NomeTag")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("TagId");
+
+                    b.HasIndex("IdProduto");
+
+                    b.ToTable("Tag", (string)null);
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -220,6 +305,28 @@ namespace Ingenico.Barcode.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("Ingenico.Barcode.Domain.Entites.CategoriaEntity", b =>
+                {
+                    b.HasOne("Ingenico.Barcode.Domain.Entites.ProdutoEntity", "Produto")
+                        .WithMany("Categorias")
+                        .HasForeignKey("IdProduto")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Produto");
+                });
+
+            modelBuilder.Entity("Ingenico.Barcode.Domain.Entites.TagEntity", b =>
+                {
+                    b.HasOne("Ingenico.Barcode.Domain.Entites.ProdutoEntity", "Produto")
+                        .WithMany("Tags")
+                        .HasForeignKey("IdProduto")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Produto");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -269,6 +376,13 @@ namespace Ingenico.Barcode.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Ingenico.Barcode.Domain.Entites.ProdutoEntity", b =>
+                {
+                    b.Navigation("Categorias");
+
+                    b.Navigation("Tags");
                 });
 #pragma warning restore 612, 618
         }

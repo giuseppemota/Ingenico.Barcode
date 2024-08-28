@@ -47,7 +47,7 @@ namespace Ingenico.Barcode.Domain.Handlers{
 
             return Result.Success(produtoResponse);
         }
-
+        /*
         private ObterCategoriaResponse MapToCadastrarCategoriaResponse(CategoriaEntity categoria) {
 
             return new ObterCategoriaResponse { 
@@ -67,5 +67,6 @@ namespace Ingenico.Barcode.Domain.Handlers{
 
             };
         }
+        */
     }
 }

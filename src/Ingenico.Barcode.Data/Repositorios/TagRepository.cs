@@ -29,7 +29,7 @@ namespace Ingenico.Barcode.Data.Repositorios {
             return tag;
         }
 
-        public async Task<TagEntity> ObterTagAsync(int id) {
+        public async Task<TagEntity> ObterTagAsync(Guid id) {
             var tag = await _context.Tag
                 .FirstOrDefaultAsync(p => p.TagId == id);
             return tag;

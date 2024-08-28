@@ -3,7 +3,7 @@
 namespace Ingenico.Barcode.Domain.Repository {
     public interface IProdutoRepository {
     
-        Task<ProdutoEntity> ObterProdutoAsync(int id);
+        Task<ProdutoEntity> ObterProdutoAsync(Guid id);
         Task<List<ProdutoEntity>> ObterTodosProdutosAsync();
         Task<ProdutoEntity> CadastrarProdutoAsync(ProdutoEntity produto);
         Task<ProdutoEntity> AtualizarProdutoAsync(ProdutoEntity produto);

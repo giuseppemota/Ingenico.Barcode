@@ -5,6 +5,6 @@ using OperationResult;
 
 namespace Ingenico.Barcode.Shared.Requests{
     public class ExcluirTagRequest : IRequest<Result<ExcluirTagResponse>> {
-        public int TagId { get; set; }
+        public Guid TagId { get; set; }
     }
 }

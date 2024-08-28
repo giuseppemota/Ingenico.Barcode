@@ -36,6 +36,7 @@ namespace Ingenico.Barcode.Domain.Handlers{
                 Descricao = request.Descricao,
                 Marca = request.Marca,
                 Validade = request.Validade,
+                Preco = request.Preco,
                 Peso = request.Peso,
                 UnidadeMedida = request.UnidadeMedida,
                 Ingredientes = request.Ingredientes,

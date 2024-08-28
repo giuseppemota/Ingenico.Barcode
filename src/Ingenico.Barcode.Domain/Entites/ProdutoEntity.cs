@@ -2,7 +2,7 @@
 
 namespace Ingenico.Barcode.Domain.Entites {
     public class ProdutoEntity {
-        public int ProdutoId { get; set; }
+        public Guid ProdutoId { get; set; }
         public string Nome { get; set; } = default!;
         public string Descricao { get; set; } = default!;
         public string Marca { get; set; } = default!;
@@ -17,8 +17,11 @@ namespace Ingenico.Barcode.Domain.Entites {
         // Relacionamento com Categoria
         //public int CategoriaId { get; set; }
         //public CategoriaEntity Categoria { get; set; }
+
         public ICollection<CategoriaEntity> Categorias { get; set; } = new List<CategoriaEntity>();
+
         // Relacionamento com Tags (Muitos para Muitos)
+
         public ICollection<TagEntity> Tags { get; set; } = new List<TagEntity>();
 
         // Relacionamento com Preço

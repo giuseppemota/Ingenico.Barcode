@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Ingenico.Barcode.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class InicialMigration : Migration
+    public partial class MigrationCrud : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -48,6 +48,26 @@ namespace Ingenico.Barcode.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Produto",
+                columns: table => new
+                {
+                    ProdutoId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Nome = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
+                    Descricao = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Marca = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Validade = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Peso = table.Column<double>(type: "float", nullable: false),
+                    Preco = table.Column<double>(type: "float", nullable: false),
+                    UnidadeMedida = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Ingredientes = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PaisOrigem = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Produto", x => x.ProdutoId);
                 });
 
             migrationBuilder.CreateTable(
@@ -156,6 +176,44 @@ namespace Ingenico.Barcode.Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Categoria",
+                columns: table => new
+                {
+                    CategoriaId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IdProduto = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Categoria", x => x.CategoriaId);
+                    table.ForeignKey(
+                        name: "FK_Categoria_Produto_IdProduto",
+                        column: x => x.IdProduto,
+                        principalTable: "Produto",
+                        principalColumn: "ProdutoId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Tag",
+                columns: table => new
+                {
+                    TagId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    NomeTag = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IdProduto = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Tag", x => x.TagId);
+                    table.ForeignKey(
+                        name: "FK_Tag_Produto_IdProduto",
+                        column: x => x.IdProduto,
+                        principalTable: "Produto",
+                        principalColumn: "ProdutoId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -194,6 +252,16 @@ namespace Ingenico.Barcode.Data.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Categoria_IdProduto",
+                table: "Categoria",
+                column: "IdProduto");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tag_IdProduto",
+                table: "Tag",
+                column: "IdProduto");
         }
 
         /// <inheritdoc />
@@ -215,10 +283,19 @@ namespace Ingenico.Barcode.Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Categoria");
+
+            migrationBuilder.DropTable(
+                name: "Tag");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Produto");
         }
     }
 }

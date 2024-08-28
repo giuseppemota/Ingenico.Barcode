@@ -4,6 +4,6 @@ using OperationResult;
 
 namespace Ingenico.Barcode.Shared.Requests {
     public class ObterCategoriaRequest : IRequest<Result<ObterCategoriaResponse>> { 
-        public int CategoriaId { get; set; }
+        public Guid CategoriaId { get; set; }
     }
 }

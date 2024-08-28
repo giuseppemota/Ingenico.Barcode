@@ -4,7 +4,7 @@ using OperationResult;
 
 namespace Ingenico.Barcode.Shared.Requests {
     public class AtualizarProdutoRequest : IRequest<Result<AtualizarProdutoResponse>> {
-        public int ProdutoId { get; set; }
+        public Guid ProdutoId { get; set; }
         public string Nome { get; set; } = default!;
         public string Descricao { get; set; } = default!;
         public string Marca { get; set; } = default!;

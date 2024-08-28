@@ -29,7 +29,7 @@ namespace Ingenico.Barcode.Data.Repositorios {
             return produto;
         }
 
-        public async Task<ProdutoEntity> ObterProdutoAsync(int id) {
+        public async Task<ProdutoEntity> ObterProdutoAsync(Guid id) {
             var produto = await _context.Produto
                 .FirstOrDefaultAsync(p => p.ProdutoId == id);
             return produto;
