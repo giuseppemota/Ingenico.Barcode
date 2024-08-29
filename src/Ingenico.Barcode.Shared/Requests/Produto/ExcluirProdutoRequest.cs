@@ -7,3 +7,4 @@ namespace Ingenico.Barcode.Shared.Requests {
         public Guid ProdutoId { get; set; }
     }
 }
+    

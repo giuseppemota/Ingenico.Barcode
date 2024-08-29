@@ -30,6 +30,7 @@ namespace Ingenico.Barcode.Data.Repositorios {
         }
 
         public async Task<ProdutoEntity> ObterProdutoAsync(Guid id) {
+
             var produto = await _context.Produto
                 .FirstOrDefaultAsync(p => p.ProdutoId == id);
             return produto;
@@ -39,6 +40,10 @@ namespace Ingenico.Barcode.Data.Repositorios {
             var produtos = await _context.Produto
                 .ToListAsync();
             return produtos;
+        }
+        public IQueryable<ProdutoEntity> ObterQueryable()
+        {
+            return _context.Produto.AsQueryable();
         }
     }
 }

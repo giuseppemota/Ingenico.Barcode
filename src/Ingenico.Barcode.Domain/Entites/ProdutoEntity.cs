@@ -1,31 +1,23 @@
 ﻿using Ingenico.Barcode.Shared.Requests;
 
-namespace Ingenico.Barcode.Domain.Entites {
-    public class ProdutoEntity {
+namespace Ingenico.Barcode.Domain.Entites;
+
+public class ProdutoEntity {
+
         public Guid ProdutoId { get; set; }
         public string Nome { get; set; } = default!;
         public string Descricao { get; set; } = default!;
         public string Marca { get; set; } = default!;
         public DateTime Validade { get; set; }
-        public double Peso { get; set; }
-        public double Preco {  get; set; }
+        public decimal Peso { get; set; }
+        public decimal Preco {  get; set; }
         public string UnidadeMedida { get; set; } = default!;
         public string Ingredientes { get; set; } = default!;
         public string PaisOrigem { get; set; } = default!;
 
 
-        // Relacionamento com Categoria
-        //public int CategoriaId { get; set; }
-        //public CategoriaEntity Categoria { get; set; }
-
-        public ICollection<CategoriaEntity> Categorias { get; set; } = new List<CategoriaEntity>();
-
-        // Relacionamento com Tags (Muitos para Muitos)
-
-        public ICollection<TagEntity> Tags { get; set; } = new List<TagEntity>();
-
-        // Relacionamento com Preço
-        //public ICollection<PrecoEntity> Precos { get; set; } = new List<PrecoEntity>();
+        public ICollection<ProdutoCategoria> ProdutoCategoria { get; set; } = new List<ProdutoCategoria>();
+        public ICollection<ProdutoTag> ProdutoTag { get; set; } = new List<ProdutoTag>();
 
         public void Atualizar(AtualizarProdutoRequest request) {
             Nome = request.Nome;
@@ -39,5 +31,4 @@ namespace Ingenico.Barcode.Domain.Entites {
             PaisOrigem = request.PaisOrigem;
 
         }
-    }
 }

@@ -4,14 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ingenico.Barcode.Domain.Entites {
-    public class TagEntity {
-        public Guid TagId { get; set; }
-        public string NomeTag { get; set; } = default!;
+namespace Ingenico.Barcode.Domain.Entites;
 
-        public Guid IdProduto {  get; set; } 
+public class TagEntity
+{
+    public Guid TagId { get; set; }
+    public string Nome { get; set; } = default!;
 
-        // Relacionamento com Produto (Muitos para Muitos)
-        public ProdutoEntity Produto { get; set; } = default!;
-    }
+    public ICollection<ProdutoTag> ProdutoTag { get; set; } = new List<ProdutoTag>();
 }

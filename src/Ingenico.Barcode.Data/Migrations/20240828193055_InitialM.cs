@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Ingenico.Barcode.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class MigrationCrud : Migration
+    public partial class InitialM : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -51,6 +51,18 @@ namespace Ingenico.Barcode.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Categoria",
+                columns: table => new
+                {
+                    CategoriaId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Nome = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Categoria", x => x.CategoriaId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Produto",
                 columns: table => new
                 {
@@ -59,8 +71,8 @@ namespace Ingenico.Barcode.Data.Migrations
                     Descricao = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Marca = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Validade = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Peso = table.Column<double>(type: "float", nullable: false),
-                    Preco = table.Column<double>(type: "float", nullable: false),
+                    Peso = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Preco = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     UnidadeMedida = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Ingredientes = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PaisOrigem = table.Column<string>(type: "nvarchar(max)", nullable: false)
@@ -68,6 +80,18 @@ namespace Ingenico.Barcode.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Produto", x => x.ProdutoId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Tag",
+                columns: table => new
+                {
+                    TagId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Nome = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Tag", x => x.TagId);
                 });
 
             migrationBuilder.CreateTable(
@@ -177,40 +201,50 @@ namespace Ingenico.Barcode.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Categoria",
+                name: "ProdutoCategoria",
                 columns: table => new
                 {
-                    CategoriaId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IdProduto = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    ProdutoId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CategoriaId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Categoria", x => x.CategoriaId);
+                    table.PrimaryKey("PK_ProdutoCategoria", x => new { x.ProdutoId, x.CategoriaId });
                     table.ForeignKey(
-                        name: "FK_Categoria_Produto_IdProduto",
-                        column: x => x.IdProduto,
+                        name: "FK_ProdutoCategoria_Categoria_CategoriaId",
+                        column: x => x.CategoriaId,
+                        principalTable: "Categoria",
+                        principalColumn: "CategoriaId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ProdutoCategoria_Produto_ProdutoId",
+                        column: x => x.ProdutoId,
                         principalTable: "Produto",
                         principalColumn: "ProdutoId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Tag",
+                name: "ProdutoTag",
                 columns: table => new
                 {
-                    TagId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    NomeTag = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IdProduto = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    ProdutoId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    TagId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Tag", x => x.TagId);
+                    table.PrimaryKey("PK_ProdutoTag", x => new { x.ProdutoId, x.TagId });
                     table.ForeignKey(
-                        name: "FK_Tag_Produto_IdProduto",
-                        column: x => x.IdProduto,
+                        name: "FK_ProdutoTag_Produto_ProdutoId",
+                        column: x => x.ProdutoId,
                         principalTable: "Produto",
                         principalColumn: "ProdutoId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ProdutoTag_Tag_TagId",
+                        column: x => x.TagId,
+                        principalTable: "Tag",
+                        principalColumn: "TagId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -254,14 +288,14 @@ namespace Ingenico.Barcode.Data.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Categoria_IdProduto",
-                table: "Categoria",
-                column: "IdProduto");
+                name: "IX_ProdutoCategoria_CategoriaId",
+                table: "ProdutoCategoria",
+                column: "CategoriaId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Tag_IdProduto",
-                table: "Tag",
-                column: "IdProduto");
+                name: "IX_ProdutoTag_TagId",
+                table: "ProdutoTag",
+                column: "TagId");
         }
 
         /// <inheritdoc />
@@ -283,10 +317,10 @@ namespace Ingenico.Barcode.Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Categoria");
+                name: "ProdutoCategoria");
 
             migrationBuilder.DropTable(
-                name: "Tag");
+                name: "ProdutoTag");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -295,7 +329,13 @@ namespace Ingenico.Barcode.Data.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
+                name: "Categoria");
+
+            migrationBuilder.DropTable(
                 name: "Produto");
+
+            migrationBuilder.DropTable(
+                name: "Tag");
         }
     }
 }

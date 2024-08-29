@@ -7,6 +7,6 @@ namespace Ingenico.Barcode.Domain.Repository {
         Task<TagEntity> CadastrarTagAsync(TagEntity tag);
         Task<TagEntity> AtualizarTagAsync(TagEntity tag);
         Task<TagEntity> ExcluirTagAsync(TagEntity tag);
-
+        Task<TagEntity?> ObterTagPorNomeAsync(string nome);
     }
 }

@@ -3,6 +3,5 @@
         public Guid TagId { get; set; }
         public string NomeTag { get; set; } = default!;
 
-        public int IdProduto { get; set; }
     }
 }

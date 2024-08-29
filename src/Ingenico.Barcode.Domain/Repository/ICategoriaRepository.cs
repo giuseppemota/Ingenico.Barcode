@@ -8,5 +8,6 @@ namespace Ingenico.Barcode.Domain.Repository {
         Task<CategoriaEntity> CadastrarCategoriaAsync(CategoriaEntity categoria);
         Task<CategoriaEntity> AtualizarCategoriaAsync(CategoriaEntity categoria);
         Task<CategoriaEntity> ExcluirCategoriaAsync(CategoriaEntity categoria);
+        Task<CategoriaEntity?> ObterCategoriaPorNomeAsync(string nome);
     }
 }

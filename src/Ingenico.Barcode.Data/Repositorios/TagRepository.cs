@@ -34,7 +34,11 @@ namespace Ingenico.Barcode.Data.Repositorios {
                 .FirstOrDefaultAsync(p => p.TagId == id);
             return tag;
         }
-
+        public async Task<TagEntity?> ObterTagPorNomeAsync(string nome)
+        {
+            return await _context.Tag
+                                 .FirstOrDefaultAsync(t => t.Nome == nome);
+        }
 
         public async Task<List<TagEntity>> ObterTodasTagsAsync() {
             var tags = await _context.Tag

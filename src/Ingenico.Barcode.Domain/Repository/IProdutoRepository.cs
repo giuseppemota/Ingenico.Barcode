@@ -8,6 +8,8 @@ namespace Ingenico.Barcode.Domain.Repository {
         Task<ProdutoEntity> CadastrarProdutoAsync(ProdutoEntity produto);
         Task<ProdutoEntity> AtualizarProdutoAsync(ProdutoEntity produto);
         Task<ProdutoEntity> ExcluirProdutoAsync(ProdutoEntity produto);
+        IQueryable<ProdutoEntity> ObterQueryable();
+
 
         //Task<List<CategoriaEntity>> ObterCategoriasAsync(int id);
         //Task<List<TagEntity>> ObterTagsAsync(int id);
