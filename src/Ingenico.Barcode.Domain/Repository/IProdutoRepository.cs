@@ -10,6 +10,9 @@ namespace Ingenico.Barcode.Domain.Repository {
         Task<ProdutoEntity> ExcluirProdutoAsync(ProdutoEntity produto);
         IQueryable<ProdutoEntity> ObterQueryable();
 
+        void RemoverCategorias(ProdutoEntity produto);
+        void RemoverTags(ProdutoEntity produto);
+
 
         //Task<List<CategoriaEntity>> ObterCategoriasAsync(int id);
         //Task<List<TagEntity>> ObterTagsAsync(int id);

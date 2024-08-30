@@ -32,6 +32,8 @@ namespace Ingenico.Barcode.Data.Repositorios {
         public async Task<ProdutoEntity> ObterProdutoAsync(Guid id) {
 
             var produto = await _context.Produto
+                .Include(p => p.ProdutoCategoria)
+                .Include(p => p.ProdutoTag)
                 .FirstOrDefaultAsync(p => p.ProdutoId == id);
             return produto;
         }
@@ -44,6 +46,18 @@ namespace Ingenico.Barcode.Data.Repositorios {
         public IQueryable<ProdutoEntity> ObterQueryable()
         {
             return _context.Produto.AsQueryable();
+        }
+
+        // Novo método para remover associações de categorias
+        public void RemoverCategorias(ProdutoEntity produto) {
+            var categoriasParaRemover = produto.ProdutoCategoria.ToList();
+            _context.Set<ProdutoCategoria>().RemoveRange(categoriasParaRemover);
+        }
+
+        // Novo método para remover associações de tags
+        public void RemoverTags(ProdutoEntity produto) {
+            var tagsParaRemover = produto.ProdutoTag.ToList();
+            _context.Set<ProdutoTag>().RemoveRange(tagsParaRemover);
         }
     }
 }
