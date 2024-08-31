@@ -15,6 +15,13 @@ namespace Ingenico.Barcode.API.Controllers {
             _logger = logger;
         }
 
+        [HttpGet]
+        [ProducesResponseType(typeof(ObterTodosProdutosResponse), StatusCodes.Status200OK)]
+        public async Task<ActionResult<ObterTodosProdutosResponse>> ObterTodosProdutosAsync() {
+            _logger.LogInformation("Obtendo todos produtos");
+            return await SendCommand(new ObterTodosProdutosRequest());
+        }
+
         [HttpGet("{ProdutoId}")]
         [ProducesResponseType(typeof(ObterProdutoResponse), StatusCodes.Status200OK)]
         public async Task<ActionResult<ObterProdutoResponse>> ObterProdutoAsync([FromRoute] Guid ProdutoId) {

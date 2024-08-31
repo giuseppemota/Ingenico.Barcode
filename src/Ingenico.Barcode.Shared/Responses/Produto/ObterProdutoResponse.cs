@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Ingenico.Barcode.Shared.Responses
+﻿namespace Ingenico.Barcode.Shared.Responses
 {
     public class ObterProdutoResponse
     {

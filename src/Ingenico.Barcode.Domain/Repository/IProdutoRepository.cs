@@ -14,6 +14,7 @@ namespace Ingenico.Barcode.Domain.Repository {
         void RemoverTags(ProdutoEntity produto);
 
 
+
         //Task<List<CategoriaEntity>> ObterCategoriasAsync(int id);
         //Task<List<TagEntity>> ObterTagsAsync(int id);
 
