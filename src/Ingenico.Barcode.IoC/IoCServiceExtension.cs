@@ -3,7 +3,9 @@ using System.Diagnostics.CodeAnalysis;
 using System.Text;
 using FluentValidation;
 using Ingenico.Barcode.Data;
+using Ingenico.Barcode.Data.Repositorios;
 using Ingenico.Barcode.Domain.Pipelines;
+using Ingenico.Barcode.Domain.Repository;
 using Ingenico.Barcode.Shared;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -26,9 +28,18 @@ namespace Ingenico.Barcode.IoC
             cfg.RegisterServicesFromAssemblies(AppDomain.CurrentDomain.GetAssemblies()));
             services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ExceptionPipeline<,>));
             services.AddScoped(typeof(IPipelineBehavior<,>), typeof(BehaviorValidation<,>));
-            ConfigurarFluentValidation(services);
 
+            ConfigurarFluentValidation(services);
             ConfigureJWT(services, configuration);
+
+            services.AddScoped<ICategoriaRepository, CategoriaRepository>();
+            services.AddScoped<ITagRepository, TagRepository>();
+            services.AddScoped<IProdutoRepository, ProdutoRepository>();
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
+
+            
+
+            
 
 
 

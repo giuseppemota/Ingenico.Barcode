@@ -24,6 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Ingenico.Barcode.Data\Ingenico.Barcode.Data.csproj" />
     <ProjectReference Include="..\Ingenico.Barcode.IoC\Ingenico.Barcode.IoC.csproj" />
   </ItemGroup>
 
