@@ -22,15 +22,15 @@ namespace Ingenico.Barcode.Domain.Handlers {
         public async Task<Result<ObterTodosProdutosResponse>> Handle(ObterTodosProdutosRequest request, CancellationToken cancellationToken) {
             var produtos = await _produtoRepository.ObterTodosProdutosAsync();
             if (produtos == null) {
-                _logger.LogError("Nenhuma pessoa encontrada");
+                _logger.LogError("Nenhum produto encontrado");
                 //return Result.Error<ObterTodasPessoasResponse>(new Compartilhado.Exceptions.SemResultadosExcecao());
             }
 
-            var produtoResponses = new List<ObterProdutoResponse>();
+            var produtoResponses = new List<ObterProdutosResponse>();
 
             foreach (var produto in produtos) { 
 
-                produtoResponses.Add(new ObterProdutoResponse {
+                produtoResponses.Add(new ObterProdutosResponse {
                     ProdutoId = produto.ProdutoId,
                     Nome = produto.Nome,
                     Descricao = produto.Descricao,
