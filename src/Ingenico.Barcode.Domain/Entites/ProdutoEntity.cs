@@ -8,12 +8,15 @@ public class ProdutoEntity {
         public string Nome { get; set; } = default!;
         public string Descricao { get; set; } = default!;
         public string Marca { get; set; } = default!;
+        public string Lote { get; set; } = default!;
+        public DateTime DataFabricacao { get; set; } = default!;
         public DateTime Validade { get; set; }
         public decimal Peso { get; set; }
         public decimal Preco {  get; set; }
         public string UnidadeMedida { get; set; } = default!;
         public string Ingredientes { get; set; } = default!;
         public string PaisOrigem { get; set; } = default!;
+        
 
 
         public ICollection<ProdutoCategoria> ProdutoCategoria { get; set; } = new List<ProdutoCategoria>();

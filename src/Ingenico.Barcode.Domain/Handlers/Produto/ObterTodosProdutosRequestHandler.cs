@@ -40,7 +40,9 @@ namespace Ingenico.Barcode.Domain.Handlers {
                     Preco = produto.Preco,
                     UnidadeMedida = produto.UnidadeMedida,
                     Ingredientes = produto.Ingredientes,
-                    PaisOrigem = produto.PaisOrigem
+                    PaisOrigem = produto.PaisOrigem,
+                    DataFabricacao = produto.DataFabricacao,
+                    Lote = produto.Lote
                 });
             }
             var response = new ObterTodosProdutosResponse {

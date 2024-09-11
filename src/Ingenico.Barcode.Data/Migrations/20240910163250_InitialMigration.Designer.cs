@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Ingenico.Barcode.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240828193055_InitialM")]
-    partial class InitialM
+    [Migration("20240910163250_InitialMigration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -62,11 +62,18 @@ namespace Ingenico.Barcode.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<DateTime>("DataFabricacao")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Descricao")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Ingredientes")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Lote")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

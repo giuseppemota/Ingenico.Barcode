@@ -53,6 +53,8 @@ namespace Ingenico.Barcode.Domain.Handlers
                 UnidadeMedida = produto.UnidadeMedida,
                 Ingredientes = produto.Ingredientes,
                 PaisOrigem = produto.PaisOrigem,
+                DataFabricacao = produto.DataFabricacao,
+                Lote = produto.Lote,
                 Validade = produto.Validade,
                 Categorias = produto.ProdutoCategoria.Select(pc => new ObterCategoriaResponse
                 {
