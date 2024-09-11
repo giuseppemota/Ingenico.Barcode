@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Ingenico.Barcode.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialM : Migration
+    public partial class InitialMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -70,6 +70,8 @@ namespace Ingenico.Barcode.Data.Migrations
                     Nome = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
                     Descricao = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Marca = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Lote = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DataFabricacao = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Validade = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Peso = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Preco = table.Column<decimal>(type: "decimal(18,2)", nullable: false),

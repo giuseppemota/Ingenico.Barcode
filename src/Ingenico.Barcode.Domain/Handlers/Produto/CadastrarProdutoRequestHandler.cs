@@ -46,7 +46,9 @@ namespace Ingenico.Barcode.Domain.Handlers
                 Peso = request.Peso,
                 UnidadeMedida = request.UnidadeMedida,
                 Ingredientes = request.Ingredientes,
-                PaisOrigem = request.PaisOrigem
+                PaisOrigem = request.PaisOrigem,
+                DataFabricacao = request.DataFabricacao,
+                Lote = request.Lote
             };
 
             // Associando categorias ao produto
