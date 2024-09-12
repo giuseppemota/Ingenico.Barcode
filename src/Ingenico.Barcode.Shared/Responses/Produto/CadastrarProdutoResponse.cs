@@ -18,7 +18,7 @@
         public List<CadastrarTagResponse> Tags { get; set; } = new List<CadastrarTagResponse>();
 
         // Imagens associadas ao produto
-        public List<CadastrarImagemResponse> Imagens { get; set; } = new List<CadastrarImagemResponse>();
+        //public List<CadastrarImagemResponse> Imagens { get; set; } = new List<CadastrarImagemResponse>();
     }
 
 }

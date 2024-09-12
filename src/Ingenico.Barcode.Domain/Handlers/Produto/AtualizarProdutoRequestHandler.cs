@@ -5,16 +5,11 @@ using Ingenico.Barcode.Domain.Entites;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using OperationResult;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 using Ingenico.Barcode.Shared.Exceptions;
 using Ingenico.Barcode.Shared.Enums;
 
 namespace Ingenico.Barcode.Domain.Handlers
 {
-
-
         public class AtualizarProdutoRequestHandler : IRequestHandler<AtualizarProdutoRequest, Result<AtualizarProdutoResponse>>
         {
             private readonly IProdutoRepository _produtoRepository;

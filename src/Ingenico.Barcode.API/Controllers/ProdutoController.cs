@@ -35,10 +35,9 @@ namespace Ingenico.Barcode.API.Controllers {
         [Consumes("multipart/form-data")] // Indica que o endpoint recebe multipart/form-data
         [ProducesResponseType(typeof(CadastrarProdutoResponse), StatusCodes.Status200OK)]
         public async Task<ActionResult<CadastrarProdutoResponse>> CadastrarProdutoAsync([FromForm] CadastrarProdutoRequest request) {
-            _logger.LogInformation("Cadastrando produto novo ");
+            _logger.LogInformation("Cadastrando produto novo com imagem");
             return await SendCommand(request);
         }
-
 
 
         [HttpPut]
