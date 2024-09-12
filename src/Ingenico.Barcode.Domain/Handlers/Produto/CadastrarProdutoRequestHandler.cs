@@ -5,39 +5,40 @@ using Ingenico.Barcode.Domain.Entites;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using OperationResult;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Collections.Generic;
-using System.Linq;
 
-namespace Ingenico.Barcode.Domain.Handlers
-{
-    public class CadastrarProdutoRequestHandler : IRequestHandler<CadastrarProdutoRequest, Result<CadastrarProdutoResponse>>
-    {
+namespace Ingenico.Barcode.Domain.Handlers {
+    public class CadastrarProdutoRequestHandler : IRequestHandler<CadastrarProdutoRequest, Result<CadastrarProdutoResponse>> {
         private readonly IProdutoRepository _produtoRepository;
         private readonly ICategoriaRepository _categoriaRepository;
         private readonly ITagRepository _tagRepository;
         private readonly IUnitOfWork _unitOfWork;
         private readonly ILogger<CadastrarProdutoRequestHandler> _logger;
+        private readonly IImageUploadService _imageUploadService; // Adiciona serviço de upload de imagem
 
         public CadastrarProdutoRequestHandler(
             IProdutoRepository produtoRepository,
             ICategoriaRepository categoriaRepository,
             ITagRepository tagRepository,
             IUnitOfWork unitOfWork,
-            ILogger<CadastrarProdutoRequestHandler> logger)
+            ILogger<CadastrarProdutoRequestHandler> logger,
+            IImageUploadService imageUploadService) // Injetando o serviço de upload de imagem
         {
             _produtoRepository = produtoRepository;
             _categoriaRepository = categoriaRepository;
             _tagRepository = tagRepository;
             _unitOfWork = unitOfWork;
             _logger = logger;
+            _imageUploadService = imageUploadService;
         }
 
-        public async Task<Result<CadastrarProdutoResponse>> Handle(CadastrarProdutoRequest request, CancellationToken cancellationToken)
-        {
-            var produto = new ProdutoEntity
-            {
+        public async Task<Result<CadastrarProdutoResponse>> Handle(CadastrarProdutoRequest request, CancellationToken cancellationToken) {
+            // Faz o upload da imagem se estiver presente
+            string imagePath = null;
+            if (request.Image != null) {
+                imagePath = _imageUploadService.UploadImage(request.Image); // Realiza o upload e salva o caminho
+            }
+
+            var produto = new ProdutoEntity {
                 Nome = request.Nome,
                 Descricao = request.Descricao,
                 Marca = request.Marca,
@@ -46,43 +47,36 @@ namespace Ingenico.Barcode.Domain.Handlers
                 Peso = request.Peso,
                 UnidadeMedida = request.UnidadeMedida,
                 Ingredientes = request.Ingredientes,
-                PaisOrigem = request.PaisOrigem
+                PaisOrigem = request.PaisOrigem,
+                ImagePath = imagePath // Armazenando o caminho da imagem
             };
 
             // Associando categorias ao produto
-            foreach (var categoriaRequest in request.Categorias)
-            {
+            foreach (var categoriaRequest in request.Categorias) {
                 var categoria = await _categoriaRepository.ObterCategoriaPorNomeAsync(categoriaRequest.Nome);
-                if (categoria == null)
-                {
-                    categoria = new CategoriaEntity
-                    {
+                if (categoria == null) {
+                    categoria = new CategoriaEntity {
                         Nome = categoriaRequest.Nome
                     };
                     await _categoriaRepository.CadastrarCategoriaAsync(categoria);
                 }
 
-                produto.ProdutoCategoria.Add(new ProdutoCategoria
-                {
+                produto.ProdutoCategoria.Add(new ProdutoCategoria {
                     Categoria = categoria
                 });
             }
 
             // Associando tags ao produto
-            foreach (var tagRequest in request.Tags)
-            {
+            foreach (var tagRequest in request.Tags) {
                 var tag = await _tagRepository.ObterTagPorNomeAsync(tagRequest.Nome);
-                if (tag == null)
-                {
-                    tag = new TagEntity
-                    {
+                if (tag == null) {
+                    tag = new TagEntity {
                         Nome = tagRequest.Nome
                     };
                     await _tagRepository.CadastrarTagAsync(tag);
                 }
 
-                produto.ProdutoTag.Add(new ProdutoTag
-                {
+                produto.ProdutoTag.Add(new ProdutoTag {
                     Tag = tag
                 });
             }
@@ -90,10 +84,9 @@ namespace Ingenico.Barcode.Domain.Handlers
             await _produtoRepository.CadastrarProdutoAsync(produto);
             await _unitOfWork.SaveChangesAsync();
 
-            _logger.LogInformation("Produto cadastrado com categorias e tags");
+            _logger.LogInformation("Produto cadastrado com categorias, tags e imagem");
 
-            return Result.Success(new CadastrarProdutoResponse
-            {
+            return Result.Success(new CadastrarProdutoResponse {
                 ProdutoId = produto.ProdutoId,
                 Nome = produto.Nome,
                 Descricao = produto.Descricao,
@@ -103,18 +96,16 @@ namespace Ingenico.Barcode.Domain.Handlers
                 UnidadeMedida = produto.UnidadeMedida,
                 Ingredientes = produto.Ingredientes,
                 PaisOrigem = produto.PaisOrigem,
-                Categorias = produto.ProdutoCategoria.Select(pc => new CadastrarCategoriaResponse
-                {
+                ImagePath = produto.ImagePath, // Retorna o caminho da imagem no response
+                Categorias = produto.ProdutoCategoria.Select(pc => new CadastrarCategoriaResponse {
                     CategoriaId = pc.Categoria.CategoriaId,
                     Nome = pc.Categoria.Nome
                 }).ToList(),
-                Tags = produto.ProdutoTag.Select(pt => new CadastrarTagResponse
-                {
+                Tags = produto.ProdutoTag.Select(pt => new CadastrarTagResponse {
                     TagId = pt.Tag.TagId,
                     NomeTag = pt.Tag.Nome
                 }).ToList()
             });
         }
-
     }
 }
