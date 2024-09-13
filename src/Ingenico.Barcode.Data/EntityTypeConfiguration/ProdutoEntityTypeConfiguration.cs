@@ -19,6 +19,7 @@ public class ProdutoEntityTypeConfiguration : IEntityTypeConfiguration<ProdutoEn
         builder.Property(p => p.Ingredientes).IsRequired();
         builder.Property(p => p.PaisOrigem).IsRequired();
         builder.Property(p => p.Validade).IsRequired();
+        builder.Property(p => p.ImagePath);
 
         builder.HasMany(p => p.ProdutoCategoria)
                .WithOne(pc => pc.Produto)

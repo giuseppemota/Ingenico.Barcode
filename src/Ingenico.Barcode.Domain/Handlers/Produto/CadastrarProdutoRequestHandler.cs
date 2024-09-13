@@ -33,9 +33,12 @@ namespace Ingenico.Barcode.Domain.Handlers {
 
         public async Task<Result<CadastrarProdutoResponse>> Handle(CadastrarProdutoRequest request, CancellationToken cancellationToken) {
             // Faz o upload da imagem se estiver presente
+
+            
             string imagePath = null;
             if (request.Image != null) {
-                imagePath = _imageUploadService.UploadImage(request.Image); // Realiza o upload e salva o caminho
+                 // Realiza o upload e salva o caminho
+                imagePath = _imageUploadService.UploadImage(request.Image);
             }
 
             var produto = new ProdutoEntity {
