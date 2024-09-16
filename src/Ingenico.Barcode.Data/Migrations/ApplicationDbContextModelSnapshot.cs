@@ -59,6 +59,9 @@ namespace Ingenico.Barcode.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<DateTime>("DataFabricacao")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Descricao")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -68,6 +71,10 @@ namespace Ingenico.Barcode.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Ingredientes")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Lote")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

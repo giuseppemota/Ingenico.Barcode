@@ -52,6 +52,8 @@ namespace Ingenico.Barcode.Domain.Handlers {
                 Ingredientes = request.Ingredientes,
                 PaisOrigem = request.PaisOrigem,
                 ImagePath = imagePath // Armazenando o caminho da imagem
+                DataFabricacao = request.DataFabricacao,
+                Lote = request.Lote
             };
 
             // Associando categorias ao produto

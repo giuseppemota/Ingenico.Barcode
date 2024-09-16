@@ -10,5 +10,7 @@
         public string Ingredientes { get; set; } = default!;
         public string PaisOrigem { get; set; } = default!;
         public DateTime Validade { get; set; }
+        public DateTime DataFabricacao { get; set; } = default!;
+        public string Lote { get; set; } = default!;
     }
 }

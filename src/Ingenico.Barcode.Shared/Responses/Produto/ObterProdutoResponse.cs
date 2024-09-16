@@ -12,6 +12,8 @@
         public string Ingredientes { get; set; } = default!;
         public string PaisOrigem { get; set; } = default!;
         public DateTime Validade { get; set; }
+        public DateTime DataFabricacao { get; set; } = default!;
+        public string Lote { get; set; } = default!;
         public List<ObterCategoriaResponse> Categorias { get; set; } = new List<ObterCategoriaResponse>();
         public List<ObterTagResponse> Tags { get; set; } = new List<ObterTagResponse>();
     }
