@@ -2,6 +2,7 @@
 using Ingenico.Barcode.Shared.Responses;
 using MediatR;
 using OperationResult;
+using Microsoft.AspNetCore.Http; // Para usar IFormFile
 
 namespace Ingenico.Barcode.Shared.Requests {
     public class CadastrarProdutoRequest : IRequest<Result<CadastrarProdutoResponse>> {
@@ -16,9 +17,12 @@ namespace Ingenico.Barcode.Shared.Requests {
         public string UnidadeMedida { get; set; }
         public string Ingredientes { get; set; }
         public string PaisOrigem { get; set; }
+        public IFormFile Image { get; set; }
 
 
         public List<ObterCategoriaRequest> Categorias { get; set; } = new List<ObterCategoriaRequest>();
         public List<ObterTagRequest> Tags { get; set; } = new List<ObterTagRequest>();
+
+        
     }
 }

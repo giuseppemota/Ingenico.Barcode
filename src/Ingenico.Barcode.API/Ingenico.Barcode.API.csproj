@@ -28,4 +28,8 @@
     <ProjectReference Include="..\Ingenico.Barcode.IoC\Ingenico.Barcode.IoC.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\images\" />
+  </ItemGroup>
+
 </Project>

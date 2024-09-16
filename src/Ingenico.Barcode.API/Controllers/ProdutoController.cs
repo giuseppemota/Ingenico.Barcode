@@ -1,4 +1,6 @@
-﻿using Ingenico.Barcode.Shared.Requests;
+﻿using Ingenico.Barcode.Data.Repositorios;
+using Ingenico.Barcode.Domain.Repository;
+using Ingenico.Barcode.Shared.Requests;
 using Ingenico.Barcode.Shared.Responses;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -30,11 +32,13 @@ namespace Ingenico.Barcode.API.Controllers {
         }
 
         [HttpPost]
+        [Consumes("multipart/form-data")] // Indica que o endpoint recebe multipart/form-data
         [ProducesResponseType(typeof(CadastrarProdutoResponse), StatusCodes.Status200OK)]
-        public async Task<ActionResult<CadastrarProdutoResponse>> CadastrarProdutoAsync([FromBody] CadastrarProdutoRequest request) {
-            _logger.LogInformation("Cadastrando produto novo");
+        public async Task<ActionResult<CadastrarProdutoResponse>> CadastrarProdutoAsync([FromForm] CadastrarProdutoRequest request) {
+            _logger.LogInformation("Cadastrando produto novo com imagem");
             return await SendCommand(request);
         }
+
 
         [HttpPut]
         [ProducesResponseType(typeof(AtualizarProdutoResponse), StatusCodes.Status200OK)]
@@ -45,8 +49,8 @@ namespace Ingenico.Barcode.API.Controllers {
 
         [HttpDelete]
         [ProducesResponseType(typeof(ExcluirProdutoResponse), StatusCodes.Status200OK)]
-        public async Task<ActionResult<ExcluirProdutoResponse>> ExcluirPessoaAsync([FromBody] ExcluirProdutoRequest request) {
-            _logger.LogInformation($"Excluindo a pessoa {request.ProdutoId}");
+        public async Task<ActionResult<ExcluirProdutoResponse>> ExcluirProdutoAsync([FromBody] ExcluirProdutoRequest request) {
+            _logger.LogInformation($"Excluindo produto {request.ProdutoId}");
             return await SendCommand(request);
         }
     }

@@ -35,6 +35,8 @@ namespace Ingenico.Barcode.IoC
             services.AddScoped<ICategoriaRepository, CategoriaRepository>();
             services.AddScoped<ITagRepository, TagRepository>();
             services.AddScoped<IProdutoRepository, ProdutoRepository>();
+            services.AddScoped<IImageUploadService, ImageUploadService>();
+
             services.AddTransient<IUnitOfWork, UnitOfWork>();
 
             
