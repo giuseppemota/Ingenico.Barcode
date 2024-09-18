@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Ingenico.Barcode.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialMigration : Migration
+    public partial class MigrationDeImagensFuncional : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -77,7 +77,8 @@ namespace Ingenico.Barcode.Data.Migrations
                     Preco = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     UnidadeMedida = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Ingredientes = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PaisOrigem = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    PaisOrigem = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ImagePath = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
