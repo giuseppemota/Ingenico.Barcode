@@ -11,22 +11,16 @@ using Ingenico.Barcode.Shared.Enums;
 using Ingenico.Barcode.Shared.Exceptions;
 using OperationResult;
 
-namespace Ingenico.Barcode.Domain.Handlers
-{
-    public class LoginUserHandler : IRequestHandler<LoginUserRequest, Result<LoginUserResponse>>
+namespace Ingenico.Barcode.Domain.Handlers;
+    public class LoginUserHandler(
+        UserManager<IdentityUser> userManager,
+        SignInManager<IdentityUser> signInManager,
+        IConfiguration configuration)
+        : IRequestHandler<LoginUserRequest, Result<LoginUserResponse>>
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
-        private readonly IConfiguration _configuration;
-
-        public LoginUserHandler(UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager,
-            IConfiguration configuration)
-        {
-            _userManager = userManager;
-            _signInManager = signInManager;
-            _configuration = configuration;
-        }
+        private readonly UserManager<IdentityUser> _userManager = userManager;
+        private readonly SignInManager<IdentityUser> _signInManager = signInManager;
+        private readonly IConfiguration _configuration = configuration;
 
         public async Task<Result<LoginUserResponse>> Handle(LoginUserRequest request,
             CancellationToken cancellationToken)
@@ -56,4 +50,3 @@ namespace Ingenico.Barcode.Domain.Handlers
             return Result.Error<LoginUserResponse>(new ExceptionAplication(AuthError.UsuarioNaoEncontrado));
         }
     }
-}
