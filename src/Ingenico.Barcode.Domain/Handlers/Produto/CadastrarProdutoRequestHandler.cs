@@ -35,7 +35,9 @@ namespace Ingenico.Barcode.Domain.Handlers {
             // Faz o upload da imagem se estiver presente
 
             
-            string imagePath = string.Empty;
+
+            string? imagePath = string.Empty;
+
             if (request.Image != null) {
                  // Realiza o upload e salva o caminho
                 imagePath = _imageUploadService.UploadImage(request.Image);

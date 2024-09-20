@@ -12,7 +12,7 @@ public class ImageUploadService : IImageUploadService {
         _imageFolderPath = configuration["ImageSettings:ImageFolderPath"];
     }
 
-    public string UploadImage(IFormFile image) {
+    public string? UploadImage(IFormFile? image) {
         if (image == null || image.Length == 0)
             // throw new ArgumentException("Imagem inválida.");
             return null;

@@ -17,7 +17,7 @@ public class ProdutoEntity {
         public string UnidadeMedida { get; set; } = default!;
         public string Ingredientes { get; set; } = default!;
         public string PaisOrigem { get; set; } = default!;
-        public string ImagePath { get; set; } = default!;// Caminho da imagem no servidor
+        public string ImagePath { get; set; } = string.Empty;// Caminho da imagem no servidor
   
         public ICollection<ProdutoCategoria> ProdutoCategoria { get; set; } = new List<ProdutoCategoria>();
         public ICollection<ProdutoTag> ProdutoTag { get; set; } = new List<ProdutoTag>();

@@ -17,7 +17,7 @@ namespace Ingenico.Barcode.Shared.Requests {
         public string UnidadeMedida { get; set; }
         public string Ingredientes { get; set; }
         public string PaisOrigem { get; set; }
-        public IFormFile Image { get; set; }
+        public IFormFile? Image { get; set; }
 
 
         public List<ObterCategoriaRequest> Categorias { get; set; } = new List<ObterCategoriaRequest>();
