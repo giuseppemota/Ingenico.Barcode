@@ -53,5 +53,12 @@ namespace Ingenico.Barcode.API.Controllers {
             _logger.LogInformation($"Excluindo produto {request.ProdutoId}");
             return await SendCommand(request);
         }
+
+        [HttpGet("{ProdutoId}/imagem")]
+        [ProducesResponseType(typeof(ObterImagemProdutoResponse), StatusCodes.Status200OK)]
+        public async Task<ActionResult<ObterImagemProdutoResponse>> ObterImagemAsync([FromRoute] Guid ProdutoId) {
+            _logger.LogInformation($"Obtendo imagem do produto {ProdutoId}");
+            return await SendCommand(new ObterImagemProdutoRequest { ProdutoId = ProdutoId });
+        }
     }
 }

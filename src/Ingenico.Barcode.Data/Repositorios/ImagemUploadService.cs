@@ -14,7 +14,8 @@ public class ImageUploadService : IImageUploadService {
 
     public string UploadImage(IFormFile image) {
         if (image == null || image.Length == 0)
-            throw new ArgumentException("Imagem inválida.");
+            // throw new ArgumentException("Imagem inválida.");
+            return null;
 
         var imageName = Guid.NewGuid().ToString() + Path.GetExtension(image.FileName);
         var imagePath = Path.Combine(_imageFolderPath, imageName);
