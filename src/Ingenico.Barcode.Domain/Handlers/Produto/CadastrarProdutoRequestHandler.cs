@@ -35,7 +35,7 @@ namespace Ingenico.Barcode.Domain.Handlers {
             // Faz o upload da imagem se estiver presente
 
             
-            string imagePath = null;
+            string imagePath = string.Empty;
             if (request.Image != null) {
                  // Realiza o upload e salva o caminho
                 imagePath = _imageUploadService.UploadImage(request.Image);
@@ -87,7 +87,7 @@ namespace Ingenico.Barcode.Domain.Handlers {
             }
 
             await _produtoRepository.CadastrarProdutoAsync(produto);
-            await _unitOfWork.SaveChangesAsync();
+            await _unitOfWork.SaveChangesAsync(cancellationToken);
 
             _logger.LogInformation("Produto cadastrado com categorias, tags e imagem");
 

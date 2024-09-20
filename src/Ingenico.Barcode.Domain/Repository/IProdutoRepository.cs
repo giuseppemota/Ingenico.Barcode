@@ -5,6 +5,7 @@ namespace Ingenico.Barcode.Domain.Repository {
     
         Task<ProdutoEntity> ObterProdutoAsync(Guid id);
         Task<List<ProdutoEntity>> ObterTodosProdutosAsync();
+        Task<List<ProdutoEntity>> ObterProdutosPorTagsAsync(List<ProdutoTag> produtoTags);
         Task<ProdutoEntity> CadastrarProdutoAsync(ProdutoEntity produto);
         Task<ProdutoEntity> AtualizarProdutoAsync(ProdutoEntity produto);
         Task<ProdutoEntity> ExcluirProdutoAsync(ProdutoEntity produto);
