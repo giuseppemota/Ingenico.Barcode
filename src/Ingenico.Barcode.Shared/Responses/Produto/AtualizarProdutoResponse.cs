@@ -9,6 +9,8 @@ namespace Ingenico.Barcode.Shared.Responses
         public string Nome { get; set; }
         public string Descricao { get; set; }
         public string Marca { get; set; }
+        public string Lote { get; set; } = default!;
+        public DateTime DataFabricacao { get; set; } = default!;
         public decimal Preco { get; set; }
         public decimal Peso { get; set; }
         public string UnidadeMedida { get; set; }

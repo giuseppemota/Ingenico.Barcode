@@ -18,19 +18,16 @@ public class ProdutoEntity {
         public string Ingredientes { get; set; } = default!;
         public string PaisOrigem { get; set; } = default!;
         public string ImagePath { get; set; } = default!;// Caminho da imagem no servidor
-
-
   
         public ICollection<ProdutoCategoria> ProdutoCategoria { get; set; } = new List<ProdutoCategoria>();
         public ICollection<ProdutoTag> ProdutoTag { get; set; } = new List<ProdutoTag>();
     
-
-
-
     public void Atualizar(AtualizarProdutoRequest request) {
             Nome = request.Nome;
             Descricao = request.Descricao;
             Marca = request.Marca;
+            Lote = request.Lote;
+            DataFabricacao = request.DataFabricacao;
             Validade = request.Validade;
             Peso = request.Peso;
             Preco = request.Preco;

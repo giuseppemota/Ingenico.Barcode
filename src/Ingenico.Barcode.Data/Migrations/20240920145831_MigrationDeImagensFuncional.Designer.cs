@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Ingenico.Barcode.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240918140035_MigrationDeImagensFuncional")]
+    [Migration("20240920145831_MigrationDeImagensFuncional")]
     partial class MigrationDeImagensFuncional
     {
         /// <inheritdoc />

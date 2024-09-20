@@ -14,7 +14,8 @@ public class ImageUploadService : IImageUploadService {
 
     public string UploadImage(IFormFile image) {
         if (image == null || image.Length == 0)
-            throw new ArgumentException("Imagem inválida.");
+            // throw new ArgumentException("Imagem inválida.");
+            return null;
 
         var imageName = Guid.NewGuid().ToString() + Path.GetExtension(image.FileName);
         var imagePath = Path.Combine(_imageFolderPath, imageName);
@@ -24,5 +25,15 @@ public class ImageUploadService : IImageUploadService {
         }
 
         return imageName; // Retorna o nome do arquivo para salvar no banco
+    }
+
+    public byte[]? GetImageData(string imagePath) {
+        var fullPath = Path.Combine(_imageFolderPath, imagePath);
+
+        if (!File.Exists(fullPath)) {
+            return null;
+        }
+
+        return File.ReadAllBytes(fullPath); // Retorna os bytes da imagem
     }
 }
