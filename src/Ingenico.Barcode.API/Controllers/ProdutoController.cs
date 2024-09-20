@@ -1,5 +1,6 @@
 ﻿using Ingenico.Barcode.Data.Repositorios;
 using Ingenico.Barcode.Domain.Repository;
+using Ingenico.Barcode.Shared.DTOs;
 using Ingenico.Barcode.Shared.Requests;
 using Ingenico.Barcode.Shared.Responses;
 using MediatR;
@@ -31,6 +32,13 @@ namespace Ingenico.Barcode.API.Controllers {
             return await SendCommand(new ObterProdutoRequest() { ProdutoId = ProdutoId });
         }
 
+        [HttpGet("{ProdutoId}/Similares")]
+        [ProducesResponseType(typeof(List<ProdutoResponseDTO>), StatusCodes.Status200OK)]
+        public async Task<ActionResult<List<ProdutoResponseDTO>>> ObterProdutosSimilaresAsync([FromRoute] Guid ProdutoId) {
+            _logger.LogInformation($"Obtendo produtos similares ao produto {ProdutoId}");
+            return await SendCommand(new ObterProdutosSimilaresRequest() { ProdutoId = ProdutoId });
+        }
+
         [HttpPost]
         [Consumes("multipart/form-data")] // Indica que o endpoint recebe multipart/form-data
         [ProducesResponseType(typeof(CadastrarProdutoResponse), StatusCodes.Status200OK)]
@@ -38,6 +46,8 @@ namespace Ingenico.Barcode.API.Controllers {
             _logger.LogInformation("Cadastrando produto novo com imagem");
             return await SendCommand(request);
         }
+
+
 
 
         [HttpPut]

@@ -23,7 +23,7 @@ namespace Ingenico.Barcode.Domain.Handlers {
             var produtos = await _produtoRepository.ObterTodosProdutosAsync();
             if (produtos == null) {
                 _logger.LogError("Nenhum produto encontrado");
-                //return Result.Error<ObterTodasPessoasResponse>(new Compartilhado.Exceptions.SemResultadosExcecao());
+                return Result.Error<ObterTodosProdutosResponse>(new Exception("Nenhum produto encontrado"));
             }
 
             var produtoResponses = new List<ObterProdutosResponse>();
