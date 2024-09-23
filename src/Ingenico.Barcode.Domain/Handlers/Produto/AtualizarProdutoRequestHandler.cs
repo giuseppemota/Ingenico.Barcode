@@ -43,6 +43,8 @@ namespace Ingenico.Barcode.Domain.Handlers
             produto.Nome = request.Nome;
             produto.Descricao = request.Descricao;
             produto.Marca = request.Marca;
+            produto.Lote = request.Lote;
+            produto.DataFabricacao = request.DataFabricacao;
             produto.Validade = request.Validade;
             produto.Preco = request.Preco;
             produto.Peso = request.Peso;
@@ -98,6 +100,9 @@ namespace Ingenico.Barcode.Domain.Handlers
                 Nome = produto.Nome,
                 Descricao = produto.Descricao,
                 Marca = produto.Marca,
+                Lote = produto.Lote,
+                DataFabricacao = produto.DataFabricacao,
+                Validade = produto.Validade,
                 Peso = produto.Peso,
                 Preco = produto.Preco,
                 UnidadeMedida = produto.UnidadeMedida,
