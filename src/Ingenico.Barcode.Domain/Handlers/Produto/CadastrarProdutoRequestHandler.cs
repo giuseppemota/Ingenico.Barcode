@@ -110,7 +110,7 @@ namespace Ingenico.Barcode.Domain.Handlers {
                 }).ToList(),
                 Tags = produto.ProdutoTag.Select(pt => new CadastrarTagResponse {
                     TagId = pt.Tag.TagId,
-                    NomeTag = pt.Tag.Nome
+                    Nome = pt.Tag.Nome
                 }).ToList()
             });
         }
