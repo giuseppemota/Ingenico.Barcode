@@ -6,6 +6,6 @@ using OperationResult;
 
 namespace Ingenico.Barcode.Shared.Requests {
     public class CadastrarTagRequest : IRequest<Result<CadastrarTagResponse>> {
-        public string NomeTag { get; set; } = default!;
+        public string Nome { get; set; } = default!;
     }
 }

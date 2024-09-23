@@ -88,10 +88,10 @@ namespace Ingenico.Barcode.Domain.Handlers
             // Atualizar tags
             produto.ProdutoTag.Clear();
             foreach (var tagRequest in request.Tags) {
-                var tag = await _tagRepository.ObterTagPorNomeAsync(tagRequest.NomeTag);
+                var tag = await _tagRepository.ObterTagPorNomeAsync(tagRequest.Nome);
                 if (tag == null) {
                     tag = new TagEntity {
-                        Nome = tagRequest.NomeTag
+                        Nome = tagRequest.Nome
                     };
                     await _tagRepository.CadastrarTagAsync(tag);
                 }
@@ -125,7 +125,7 @@ namespace Ingenico.Barcode.Domain.Handlers
                 }).ToList(),
                 Tags = produto.ProdutoTag.Select(pt => new ObterTagResponse {
                     TagId = pt.Tag.TagId,
-                    NomeTag = pt.Tag.Nome
+                    Nome = pt.Tag.Nome
                 }).ToList()
             });
         }

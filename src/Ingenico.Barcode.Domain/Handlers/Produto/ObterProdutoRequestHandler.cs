@@ -64,7 +64,7 @@ namespace Ingenico.Barcode.Domain.Handlers
                 Tags = produto.ProdutoTag.Select(pt => new ObterTagResponse
                 {
                     TagId = pt.Tag.TagId,
-                    NomeTag = pt.Tag.Nome
+                    Nome = pt.Tag.Nome
                 }).ToList()
             };
 
