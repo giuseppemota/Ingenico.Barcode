@@ -51,6 +51,7 @@ namespace Ingenico.Barcode.API.Controllers {
 
 
         [HttpPut]
+        [Consumes("multipart/form-data")]
         [ProducesResponseType(typeof(AtualizarProdutoResponse), StatusCodes.Status200OK)]
         public async Task<ActionResult<AtualizarProdutoResponse>> AtualizarProdutoAsync([FromBody] AtualizarProdutoRequest request) {
             _logger.LogInformation($"Atualizando produto {request.ProdutoId}");

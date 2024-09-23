@@ -1,5 +1,6 @@
 ﻿using Ingenico.Barcode.Shared.Responses;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using OperationResult;
 using System;
 using System.Collections.Generic;
@@ -22,6 +23,7 @@ namespace Ingenico.Barcode.Shared.Requests
         public DateTime Validade { get; set; }
         public List<AtualizarCategoriaRequest> Categorias { get; set; }
         public List<AtualizarTagRequest> Tags { get; set; }
+        public IFormFile? Image { get; set; }
     }
 
 

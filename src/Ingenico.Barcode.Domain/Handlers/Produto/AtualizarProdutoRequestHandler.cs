@@ -16,24 +16,34 @@ namespace Ingenico.Barcode.Domain.Handlers
             private readonly ICategoriaRepository _categoriaRepository;
             private readonly ITagRepository _tagRepository;
             private readonly IUnitOfWork _unitOfWork;
+            private readonly IImageUploadService _imageUploadService;
             private readonly ILogger<AtualizarProdutoRequestHandler> _logger;
 
             public AtualizarProdutoRequestHandler(
-                IProdutoRepository produtoRepository,
-                ICategoriaRepository categoriaRepository,
-                ITagRepository tagRepository,
-                IUnitOfWork unitOfWork,
-                ILogger<AtualizarProdutoRequestHandler> logger)
-            {
-                _produtoRepository = produtoRepository;
-                _categoriaRepository = categoriaRepository;
-                _tagRepository = tagRepository;
-                _unitOfWork = unitOfWork;
-                _logger = logger;
-            }
+            IProdutoRepository produtoRepository,
+            ICategoriaRepository categoriaRepository,
+            ITagRepository tagRepository,
+            IUnitOfWork unitOfWork,
+            ILogger<AtualizarProdutoRequestHandler> logger,
+            IImageUploadService imageUploadService)
+        {
+            _produtoRepository = produtoRepository;
+            _categoriaRepository = categoriaRepository;
+            _tagRepository = tagRepository;
+            _unitOfWork = unitOfWork;
+            _logger = logger;
+            _imageUploadService = imageUploadService;
+        }
 
         public async Task<Result<AtualizarProdutoResponse>> Handle(AtualizarProdutoRequest request, CancellationToken cancellationToken) {
             var produto = await _produtoRepository.ObterProdutoAsync(request.ProdutoId);
+            string? imagePath = produto.ImagePath;
+
+            if (request.Image != null)
+            {
+                // Realiza o upload e salva o caminho
+                imagePath = _imageUploadService.UploadImage(request.Image);
+            }
             if (produto == null) {
                 _logger.LogWarning("Produto não encontrado: {ProdutoId}", request.ProdutoId);
                 return Result.Error<AtualizarProdutoResponse>(new ExceptionAplication(AuthError.UsuarioNaoEncontrado));
@@ -51,6 +61,7 @@ namespace Ingenico.Barcode.Domain.Handlers
             produto.UnidadeMedida = request.UnidadeMedida;
             produto.Ingredientes = request.Ingredientes;
             produto.PaisOrigem = request.PaisOrigem;
+            produto.ImagePath = imagePath;
 
             // Remover associações antigas de categorias
             _produtoRepository.RemoverCategorias(produto);
