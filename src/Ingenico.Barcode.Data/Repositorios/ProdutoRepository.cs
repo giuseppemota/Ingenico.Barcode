@@ -23,6 +23,8 @@ namespace Ingenico.Barcode.Data.Repositorios
 
         public async Task<ProdutoEntity> CadastrarProdutoAsync(ProdutoEntity produto)
         {
+            
+            
             _context.Produto.Add(produto);
 
             return produto;
@@ -30,6 +32,7 @@ namespace Ingenico.Barcode.Data.Repositorios
 
         public async Task<ProdutoEntity> ExcluirProdutoAsync(ProdutoEntity produto)
         {
+            
             _context.Produto.Remove(produto);
 
             return produto;

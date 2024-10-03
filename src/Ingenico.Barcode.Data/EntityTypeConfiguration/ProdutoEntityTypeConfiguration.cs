@@ -22,6 +22,7 @@ public class ProdutoEntityTypeConfiguration : IEntityTypeConfiguration<ProdutoEn
         builder.Property(p => p.ImagePath);
         builder.Property(p => p.DataFabricacao).IsRequired();
         builder.Property(p => p.Lote).IsRequired();
+        builder.Property(p => p.IsDeleted);
 
 
         builder.HasMany(p => p.ProdutoCategoria)

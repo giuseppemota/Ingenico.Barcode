@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Ingenico.Barcode.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class MigrationDeImagensFuncional : Migration
+    public partial class MigrationSoftDelet : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -78,7 +78,8 @@ namespace Ingenico.Barcode.Data.Migrations
                     UnidadeMedida = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Ingredientes = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PaisOrigem = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ImagePath = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    ImagePath = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
