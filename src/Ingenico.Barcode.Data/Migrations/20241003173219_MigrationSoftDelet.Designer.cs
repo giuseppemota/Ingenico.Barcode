@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Ingenico.Barcode.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240920184448_MigrationDeImagensFuncional")]
-    partial class MigrationDeImagensFuncional
+    [Migration("20241003173219_MigrationSoftDelet")]
+    partial class MigrationSoftDelet
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -76,6 +76,9 @@ namespace Ingenico.Barcode.Data.Migrations
                     b.Property<string>("Ingredientes")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Lote")
                         .IsRequired()
