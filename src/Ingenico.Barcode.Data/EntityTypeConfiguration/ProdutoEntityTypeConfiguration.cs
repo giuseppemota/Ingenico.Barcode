@@ -18,9 +18,13 @@ public class ProdutoEntityTypeConfiguration : IEntityTypeConfiguration<ProdutoEn
         builder.Property(p => p.UnidadeMedida).IsRequired();
         builder.Property(p => p.Ingredientes).IsRequired();
         builder.Property(p => p.PaisOrigem).IsRequired();
-        builder.Property(p => p.Validade).IsRequired();
+        builder.Property(p => p.Validade)
+            .IsRequired()
+            .HasColumnType("timestamp without time zone");
         builder.Property(p => p.ImagePath);
-        builder.Property(p => p.DataFabricacao).IsRequired();
+        builder.Property(p => p.DataFabricacao)
+            .IsRequired()
+            .HasColumnType("timestamp without time zone");
         builder.Property(p => p.Lote).IsRequired();
         builder.Property(p => p.IsDeleted);
 

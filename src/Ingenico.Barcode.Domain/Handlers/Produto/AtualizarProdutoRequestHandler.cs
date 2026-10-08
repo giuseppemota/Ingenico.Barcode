@@ -37,16 +37,17 @@ namespace Ingenico.Barcode.Domain.Handlers
 
         public async Task<Result<AtualizarProdutoResponse>> Handle(AtualizarProdutoRequest request, CancellationToken cancellationToken) {
             var produto = await _produtoRepository.ObterProdutoAsync(request.ProdutoId);
+            if (produto == null) {
+                _logger.LogWarning("Produto não encontrado: {ProdutoId}", request.ProdutoId);
+                return Result.Error<AtualizarProdutoResponse>(new ExceptionAplication(AuthError.UsuarioNaoEncontrado));
+            }
+
             string? imagePath = produto.ImagePath;
 
             if (request.Image != null)
             {
                 // Realiza o upload e salva o caminho
-                imagePath = _imageUploadService.UploadImage(request.Image);
-            }
-            if (produto == null) {
-                _logger.LogWarning("Produto não encontrado: {ProdutoId}", request.ProdutoId);
-                return Result.Error<AtualizarProdutoResponse>(new ExceptionAplication(AuthError.UsuarioNaoEncontrado));
+                imagePath = await _imageUploadService.UploadImageAsync(request.Image, cancellationToken);
             }
 
             // Atualizar propriedades básicas
@@ -133,4 +134,3 @@ namespace Ingenico.Barcode.Domain.Handlers
     }
 
 }
-
