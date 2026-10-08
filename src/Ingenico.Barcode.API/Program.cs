@@ -1,6 +1,5 @@
 using Ingenico.Barcode.IoC;
 
-
 var builder = WebApplication.CreateBuilder(args);
 
 
@@ -14,6 +13,16 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.ConfigureAppDependencies(builder.Configuration);
 
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(policy =>
+    {
+        var allowedOrigins = builder.Configuration.GetSection("Cors:AllowedOrigins").Get<string[]>() ?? [];
+        policy.WithOrigins(allowedOrigins)
+            .AllowAnyMethod()
+            .AllowAnyHeader();
+    });
+});
 
 
 
@@ -24,27 +33,28 @@ builder.Services.ConfigureAppDependencies(builder.Configuration);
 
 var app = builder.Build();
 
+await using (var scope = app.Services.CreateAsyncScope())
+{
+    var initializer = scope.ServiceProvider.GetRequiredService<ApplicationDbContextInitialiser>();
+    await initializer.InitialiseAsync();
+    await initializer.SeedAsync();
+}
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    // await app.InitialiseDatabaseAsync();
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
-app.UseCors(options => options
-    .AllowAnyOrigin()
-    .AllowAnyMethod()
-    .AllowAnyHeader());
+app.UseCors();
 
 app.UseHealthChecks("/health");
-app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
 app.MapControllers();
 
-app.Map("/", () => Results.Redirect("/swagger"));
+app.Map("/", () => Results.Ok(new { name = "Ingenico.Barcode API", health = "/health" }));
 
 app.Run();
-

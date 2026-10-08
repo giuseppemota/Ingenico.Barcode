@@ -2,7 +2,7 @@
 
 namespace Ingenico.Barcode.Domain.Repository {
     public interface IImageUploadService {
-        string UploadImage(IFormFile image);
-        byte[]? GetImageData(string imagePath); // Método para buscar os bytes da imagem
+        Task<string?> UploadImageAsync(IFormFile? image, CancellationToken cancellationToken);
+        Task<byte[]?> GetImageDataAsync(string imagePath, CancellationToken cancellationToken);
     }
 }

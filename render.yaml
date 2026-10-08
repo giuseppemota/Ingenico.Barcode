@@ -1,0 +1,30 @@
+services:
+  - type: web
+    name: ingenico-barcode-api
+    runtime: docker
+    plan: free
+    branch: development
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /health
+    envVars:
+      - key: ASPNETCORE_ENVIRONMENT
+        value: Production
+      - key: ASPNETCORE_HTTP_PORTS
+        value: "10000"
+      - key: Cors__AllowedOrigins__0
+        value: https://ingenico-barcode.vercel.app
+      - key: ConnectionStrings__DefaultConnection
+        sync: false
+      - key: Jwt__Key
+        sync: false
+      - key: BootstrapUser__Email
+        sync: false
+      - key: BootstrapUser__Password
+        sync: false
+      - key: Cloudinary__CloudName
+        sync: false
+      - key: Cloudinary__ApiKey
+        sync: false
+      - key: Cloudinary__ApiSecret
+        sync: false

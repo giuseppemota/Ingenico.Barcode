@@ -40,7 +40,7 @@ namespace Ingenico.Barcode.Domain.Handlers {
 
             if (request.Image != null) {
                  // Realiza o upload e salva o caminho
-                imagePath = _imageUploadService.UploadImage(request.Image);
+                imagePath = await _imageUploadService.UploadImageAsync(request.Image, cancellationToken);
             }
 
             var produto = new ProdutoEntity {

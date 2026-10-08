@@ -29,7 +29,7 @@ namespace Ingenico.Barcode.Domain.Handlers {
 
             // Obtem o caminho da imagem
             var imagePath = produto.ImagePath;
-            var imageData = _imageUploadService.GetImageData(imagePath); // Método que retorna os bytes da imagem
+            var imageData = await _imageUploadService.GetImageDataAsync(imagePath, cancellationToken);
 
             return Result.Success( new ObterImagemProdutoResponse {
                 ImagePath = imagePath,

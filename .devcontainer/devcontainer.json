@@ -1,0 +1,12 @@
+{
+  "name": "Ingenico.Barcode (.NET 8)",
+  "image": "mcr.microsoft.com/devcontainers/dotnet:1-8.0-bookworm",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-dotnettools.csdevkit"
+      ]
+    }
+  },
+  "postCreateCommand": "dotnet tool restore"
+}
